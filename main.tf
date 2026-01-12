@@ -42,7 +42,7 @@ resource "null_resource" "ansible" {
     }
 
     inline = [
-      "ansible-pull -i localhost, -U https://github.com/raghudevopsb87/roboshop-ansible-docker.git main.yml -e component=${each.key} -e env=dev"
+      "ansible-pull -i localhost, -U https://github.com/adityakatakam/roboshop-ansible-docker.git main.yml -e component=${each.key} -e env=dev"
     ]
 
   }
