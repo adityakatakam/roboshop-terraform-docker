@@ -23,29 +23,29 @@ resource "aws_route53_record" "a-records" {
   records = [aws_instance.instances[each.key].private_ip]
 }
 
-resource "null_resource" "ansible" {
+# resource "null_resource" "ansible" {
 
-  depends_on = [
-    aws_instance.instances,
-    aws_route53_record.a-records
-  ]
-
-
-  for_each      = var.components
-
-  provisioner "remote-exec" {
-    connection {
-      type     = "ssh"
-      user     = "ec2-user"
-      password = "DevOps321"
-      host     = aws_instance.instances[each.key].private_ip
-    }
-
-    inline = [
-      "ansible-pull -i localhost, -U https://github.com/adityakatakam/roboshop-ansible-docker.git main.yml -e component=${each.key} -e env=dev"
-    ]
-
-  }
-
-}
+  # depends_on = [
+  #   aws_instance.instances,
+  #   aws_route53_record.a-records
+  # ]
+  #
+  #
+  # for_each      = var.components
+  #
+  # provisioner "remote-exec" {
+  #   connection {
+  #     type     = "ssh"
+  #     user     = "ec2-user"
+  #     password = "DevOps321"
+  #     host     = aws_instance.instances[each.key].private_ip
+  #   }
+  #
+  #   inline = [
+  #     "ansible-pull -i localhost, -U https://github.com/adityakatakam/roboshop-ansible-docker.git main.yml -e component=${each.key} -e env=dev"
+#   #   ]
+# #
+# #   }
+#
+# }
 
